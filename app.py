@@ -28,12 +28,12 @@ ASSETS_DIR = 'models'
 # 1. Model file configuration
 MODEL_FILENAME = 'best_model.pth'
 MODEL_PATH = os.path.join(ASSETS_DIR, MODEL_FILENAME)
-MODEL_URL = 'https://huggingface.co/YourUsername/your-repo-name/resolve/main/best_model.pth'
+MODEL_URL = 'https://huggingface.co/mahtab786/car_plate_detector/resolve/main/yolo_output_pytorch/best_model.pth'
 
 # 2. Parameters file configuration
 PARAMS_FILENAME = 'best_params.json'
 PARAMS_PATH = os.path.join(ASSETS_DIR, PARAMS_FILENAME)
-PARAMS_URL = 'https://huggingface.co/YourUsername/your-repo-name/resolve/main/best_params.json'
+PARAMS_URL = 'https://huggingface.co/mahtab786/car_plate_detector/resolve/main/yolo_output_pytorch/best_params.json'
 # ---------------------------------------------------------
 
 # Initialize the Flask App
@@ -173,3 +173,4 @@ def upload_page():
 # This block is for local testing only. Gunicorn will run the app on Render.
 if __name__ == '__main__':
     app.run(debug=True)
+
