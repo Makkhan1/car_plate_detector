@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>License Plate Extractor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- PREVIOUS DARK THEME RESTORED --- */
+        body {
+            font-family: 'Poppins', sans-serif;
+            /* The dark blue/grey gradient background is back */
+            background: linear-gradient(45deg, #2c3e50, #34495e);
+            /* Text color changed to light grey for readability on a dark background */
+            color: #ecf0f1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Container style adjusted for the dark theme */
+        .container {
+            width: 100%;
+            max-width: 480px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            padding: 40px;
+            text-align: center;
+        }
+
+        h1 {
+            font-weight: 700;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #bdc3c7; /* Lighter grey for sub-headings */
+            margin-bottom: 30px;
+        }
+
+        /* Simple border, but with colors that work on a dark background */
+        .file-upload-wrapper {
+            background-color: rgba(0, 0, 0, 0.2);
+            border: 2px dashed rgba(255, 255, 255, 0.4);
+            border-radius: 8px;
+            padding: 40px 20px;
+            cursor: pointer;
+            transition: border-color 0.3s, background-color 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 120px;
+        }
+
+        .file-upload-wrapper:hover {
+            border-color: #3498db; /* A nice blue for the hover effect */
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .file-upload-text {
+            color: #bdc3c7;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        #file-name {
+            margin-top: 10px;
+            color: #3498db;
+            font-weight: 600;
+            height: 20px;
+        }
+
+        /* Button color changed to a vibrant green that pops on the dark background */
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: #27ae60;
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 25px;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #229954;
+        }
+
+        /* Flash message styling for the dark theme */
+        .flash-message {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            color: #fff;
+        }
+        .flash-error { 
+            background-color: rgba(231, 76, 60, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>License Plate Extractor</h1>
+        <p>Upload an image to automatically detect vehicle data.</p>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-message flash-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="post" enctype="multipart/form-data">
+            <label for="file" class="file-upload-wrapper">
+                <span class="file-upload-text">Click to Upload or Drag File Here</span>
+                <div id="file-name"></div>
+                <input type="file" id="file" name="file" accept="image/png, image/jpeg, image/jpg" onchange="displayFileName()">
+            </label>
+            <button type="submit" class="submit-btn">Analyze Image</button>
+        </form>
+    </div>
+
+    <script>
+        function displayFileName() {
+            const input = document.getElementById('file');
+            const fileNameDisplay = document.getElementById('file-name');
+            if (input.files.length > 0) {
+                fileNameDisplay.textContent = 'Selected: ' + input.files[0].name;
+            } else {
+                fileNameDisplay.textContent = '';
+            }
+        }
+    </script>
+</body>
+</html>
